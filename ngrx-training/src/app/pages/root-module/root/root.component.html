@@ -1,0 +1,20 @@
+<mat-drawer-container class="sidenav-container" [hasBackdrop]="'false'">
+    <mat-drawer #drawer [mode]="'push'">
+        <mat-list>
+            <div mat-subheader> Content </div>
+            <mat-list-item *ngFor="let route of routes" class="menu-item" (click)="navigate(route.route, drawer)">
+                <div matListItemTitle>{{ route.title }}</div>
+            </mat-list-item>
+        </mat-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-toolbar>
+            <button mat-mini-fab color="primary" (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </mat-toolbar>
+        <div class="router-container">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
