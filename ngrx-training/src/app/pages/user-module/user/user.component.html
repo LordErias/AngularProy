@@ -1,1 +1,8 @@
 <p>user works!</p>
+<button (click)="addEmployee()">xxx</button>
+<ul>
+    <li *ngFor="let emp of employees$ | async" >
+        <button (click)="deleteEmployee(emp.id)">delete</button>
+        {{ emp | json }}
+    </li>
+</ul>

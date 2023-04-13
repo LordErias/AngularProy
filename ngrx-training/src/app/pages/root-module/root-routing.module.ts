@@ -16,6 +16,11 @@ const routes: Routes = [
                             .then(m => m.UserModuleModule) 
       },
       {
+        path: 'admin', 
+        loadChildren:() => import('../admin-module/admin-module.module')
+                            .then(m => m.AdminModuleModule) 
+      },
+      {
         path:'**', redirectTo:''
       }
     ]

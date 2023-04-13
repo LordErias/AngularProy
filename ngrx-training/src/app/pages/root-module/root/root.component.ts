@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RootComponent {
 
   constructor(
-    private router: Router,
-    private activeRoute: ActivatedRoute
+    private _router: Router,
+    private _activeRoute: ActivatedRoute
     ) { }
 
   routes = [
@@ -20,12 +20,13 @@ export class RootComponent {
     },
     {
       title: 'Admin',
-      route: '/admin'
+      route: 'admin'
     }
   ]
 
   navigate(route:string, drawer:any){
-    this.router.navigate([ route ],{ relativeTo: this.activeRoute });
+    console.log(route)
+    this._router.navigate([ route ],{ relativeTo: this._activeRoute });
     drawer.toggle()
   }
 }

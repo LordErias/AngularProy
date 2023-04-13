@@ -5,6 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 
 
 
+
 @NgModule({
   declarations: [
     UserComponent
@@ -12,6 +13,9 @@ import { UserRoutingModule } from './user-routing.module';
   imports: [
     CommonModule,
     UserRoutingModule
+  ],
+  exports:[
+    UserComponent
   ]
 })
 export class UserModuleModule { }
