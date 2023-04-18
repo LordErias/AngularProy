@@ -8,7 +8,10 @@ const routes: Routes = [
     path:'', component: AdminComponent
   },
   {
-    path:'maintenance', component: MaintenanceComponent
+    path:'add', component: MaintenanceComponent
+  },
+  {
+    path:'edit/:id', component: MaintenanceComponent
   },
   {
     path:'**', redirectTo:''

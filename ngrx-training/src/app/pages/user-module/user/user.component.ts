@@ -10,10 +10,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
   
-  currentId = 1;
   isAdmin: boolean = false;
   employees: Employee[] = []
   employees$ = this.store$.select('employee')
+
   constructor(private store$: Store<EmployeeState>, private _router: Router, private _activeRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -29,23 +29,9 @@ export class UserComponent implements OnInit {
     this.store$.dispatch(getEmployees())
   }
   addEmployee(): void {
-    let empDum: Employee = {
-      id: this.currentId,
-      first_name: 'pepe',
-      middle_name: 'jose',
-      last_name: 'vase',
-      age: 10 + this.currentId ,
-      skill_set: [
-        'comer',
-        'beber', 
-        'baniarse',
-        'saltar',
-        'correr'
-      ]
+    if (this.isAdmin) {
+      this._router.navigate(['add'], {relativeTo: this._activeRoute})
     }
-    this.store$.dispatch(addEmployee(empDum))
-    this.currentId = this.currentId +1;
-
   }
   deleteEmployee(id:number): void{
     if (this.isAdmin) {
