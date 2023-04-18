@@ -8,11 +8,11 @@ export interface EmployeeState {
 export interface Employee {
     id:number;
     first_name: string;
-    // middle_name: string;
-    // last_name: string;
-    // age: number;
-    // gender: string;
-    // skill_set: string[];
+    middle_name?: string;
+    last_name?: string;
+    age?: number;
+    gender?: string;
+    skill_set?: string[];
 }
 
 const initialState: Employee[] = [];
