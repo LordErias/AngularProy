@@ -8,7 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatRadioModule } from "@angular/material/radio";
-
+import { MatButtonModule } from "@angular/material/button";
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -24,7 +25,9 @@ import { MatRadioModule } from "@angular/material/radio";
     ReactiveFormsModule,
     MatInputModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatButtonModule,
+    MatDividerModule
   ]
 })
 export class AdminModuleModule { }

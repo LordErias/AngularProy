@@ -1,12 +1,12 @@
-<button (click)="addEmployee()">xxx</button>
 <div class="list-wrapper">
+    <button *ngIf="isAdmin" (click)="addEmployee()" mat-raised-button color="primary">Add employee</button>
    <mat-grid-list [cols]="5" rowHeight="1:1">
         <mat-grid-tile *ngFor="let employee of employees$ | async">
                 <mat-card style="width: 90%; height:min-content;">
                     <mat-card-header>
                         <mat-card-title>{{employee.first_name}}</mat-card-title>
                         <mat-card-subtitle>{{ employee.middle_name + ' ' + employee.last_name }}</mat-card-subtitle>
-                        <mat-card-subtitle>{{ employee.age }}</mat-card-subtitle>
+                        <mat-card-subtitle>{{ employee.age + ' years' }}</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content *ngIf="employee.skill_set">
                         <ul>
@@ -16,10 +16,10 @@
                         </ul>
                     </mat-card-content>
                     <mat-card-actions align="end" *ngIf="isAdmin" class="action-wrapper">
-                        <button mat-icon-button (click)="editEmployee(employee.id)" >
+                        <button mat-icon-button color="primary" (click)="editEmployee(employee.id)" >
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-icon-button (click)="deleteEmployee(employee.id)">
+                        <button mat-icon-button color="warn" (click)="deleteEmployee(employee.id)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </mat-card-actions>

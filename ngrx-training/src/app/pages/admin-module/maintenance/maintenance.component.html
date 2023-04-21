@@ -24,22 +24,29 @@
             <input matInput type="text" formControlName="age">
         </mat-form-field>
     </div>
-
-    <!-- Gender -->
-    <mat-radio-group formControlName="gender">
-        <mat-radio-button value="male">Male</mat-radio-button>
-        <mat-radio-button value="Female">Female</mat-radio-button>
-    </mat-radio-group>
-    <!-- <mat-form-field>
-        <mat-label>Gender</mat-label>
-        <input matInput type="text" formControlName="gender">
-    </mat-form-field> -->
-
-    <!-- Skill set -->
-    <div formArrayName="skill_set" *ngFor="let skill of skillFormArray.controls; let i = index">
-        <mat-checkbox [formControlName]="i" >{{skillSetOpts[i]}}</mat-checkbox>
+    <div class="gender-skill-wrapper">
+        <!-- Gender -->
+        <div class="flex-vertical">
+            <mat-radio-group formControlName="gender">
+                <mat-radio-button value="male">Male</mat-radio-button>
+                <mat-radio-button value="Female">Female</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        
+        <!-- Skill set -->
+        <div>
+            <div formArrayName="skill_set" *ngFor="let skill of skillFormArray.controls; let i = index">
+                <mat-checkbox [formControlName]="i" >{{skillSetOpts[i]}}</mat-checkbox>
+            </div>
+        </div>
+        <div class="buttons-wrapper">
+            <button [disabled]="employeeForm.status === 'INVALID'" mat-raised-button color="primary" (click)="save()">Save</button>
+            <button mat-raised-button color="warn" (click)="backAdmin()">Cancel</button>
+        </div>
     </div>
-    <button mat-button (click)="save()">Save</button>
+
 </form>
 
-<p>{{ employeeForm.value | json }}</p>
+<!-- <p>{{ employeeForm.value | json }}</p>
+
+<p>{{ employeeForm.status }}</p> -->

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Employee, EmployeeState } from '../../store/worker.reducer';
 import { addEmployee, editEmployee } from '../../store/workers.actions';
 import { Store } from '@ngrx/store';
-import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import * as selectors from '../../store/worker.selector'
 
 @Component({
@@ -25,11 +25,11 @@ export class MaintenanceComponent implements OnInit {
   ]
 
   employeeForm = this._fb.group({
-    first_name: [''],
-    middle_name: [''],
-    last_name: [''],
-    age: [''],
-    gender: [''],
+    first_name: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('[a-zA-Z ]*')]],
+    middle_name: ['',[Validators.maxLength(20), Validators.pattern('[a-zA-Z ]*')]],
+    last_name: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('[a-zA-Z ]*')]],
+    age: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.maxLength(3)]],
+    gender: ['', [Validators.required]],
     skill_set: this.buildSkillSet()
   })
 
@@ -72,18 +72,17 @@ export class MaintenanceComponent implements OnInit {
   addEmployee(employee: Employee): void {
     employee.id = this.newId
     this.store$.dispatch(addEmployee(employee))
-    this._router.navigateByUrl('root/admin')
+    this.backAdmin();
   }
   editEmployee(employee:Employee): void {
     employee.id = this.id;
     this.store$.dispatch(editEmployee(employee))
-    this._router.navigateByUrl('root/admin')
+    this.backAdmin();
   }
 
   save():void{
     const employee = this.cleanSkills(this.employeeForm.value);
 
-    console.log(employee)
     if (this.isEdit) {
       this.editEmployee(employee)
     } else {
@@ -94,6 +93,10 @@ export class MaintenanceComponent implements OnInit {
   cleanSkills(employee: any): Employee{
     employee.skill_set = employee.skill_set.map((v:any ,i:number ) => v ? this.skillSetOpts[i]: null)
     return  employee
+  }
+
+  backAdmin(): void {
+    this._router.navigateByUrl('root/admin')
   }
 
   get skillFormArray(): FormArray{

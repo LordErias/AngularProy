@@ -1,18 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { EmployeeState } from '../../store/worker.reducer';
+import { getEmployees } from '../../store/workers.actions';
 
 @Component({
   selector: 'app-root',
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.sass']
 })
-export class RootComponent {
+export class RootComponent implements OnInit{
 
   constructor(
     private _router: Router,
-    private _activeRoute: ActivatedRoute
+    private _activeRoute: ActivatedRoute,
+    private store$: Store<EmployeeState>
     ) { }
 
+
+  ngOnInit(): void {
+    this.store$.dispatch(getEmployees())
+  }
   routes = [
     {
       title: 'User',
